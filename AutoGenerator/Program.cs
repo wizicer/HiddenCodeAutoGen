@@ -9,7 +9,7 @@ namespace AutoGenerator
     {
         static void Main(string[] args)
         {
-            int k = 0;
+            int jj = 0;
         }
     }
 }
