@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+ 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\10.0\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\IcerWPFSmartGen]
+"CLSID"="{DC5BEA27-51D3-4330-9CB3-CB2F5FF7A014}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Icer WPF Smart Generator"

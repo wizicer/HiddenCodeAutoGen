@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+ 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\10.0\CLSID\{DC5BEA27-51D3-4330-9CB3-CB2F5FF7A014}]
+"InprocServer32"="C:\\Windows\\SysWOW64\\mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="IcerWPFSmartGen.Generator"
+"Assembly"="IcerWPFSmartGen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a0983796ce59afa6"
+"CodeBase"="file:///X:\\8-TempWork\\WPFHelper\\IcerWPFSmartGen\\bin\\Debug\\IcerWPFSmartGen.dll"

@@ -4,3 +4,9 @@ obj
 
 # mstest test results
 TestResults
+
+
+
+*.ncrunchsolution
+*.ncrunchsolution.user
+*.suo
