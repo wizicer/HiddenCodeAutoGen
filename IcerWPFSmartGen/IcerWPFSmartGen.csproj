@@ -56,7 +56,9 @@
     <Compile Include="UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ComRegX64.reg" />
     <None Include="key.snk" />
+    <None Include="RegVS2010X64.reg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ComReg.reg" />
