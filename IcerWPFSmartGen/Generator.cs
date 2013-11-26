@@ -52,19 +52,30 @@
 
         public string Gen(string bstrInputFileContents)
         {
-            return Gen(bstrInputFileContents, genName =>
+            try
             {
-                var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("AutoGen{0}.cs", genName));
-                if (File.Exists(file))
+                var source = RemoveComments(bstrInputFileContents);
+                return Gen(source, genName =>
                 {
-                    IGenerator script = CSScript.Evaluator.LoadFile<IGenerator>(file);
-                    return script;
-                }
-                return null;
-            });
+                    //var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("AutoGen{0}.cs", genName));
+                    var file = Path.Combine(
+                        (new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location)).Directory.FullName,
+                        string.Format("AutoGen{0}.cs", genName));
+                    if (File.Exists(file))
+                    {
+                        IGenerator script = CSScript.Evaluator.LoadFile<IGenerator>(file);
+                        return script;
+                    }
+                    return null;
+                });
+            }
+            catch (Exception ex)
+            {
+                return string.Format("/*\r\n{0}\r\n*/", ex.Message);
+            }
         }
 
-        public string Gen(string bstrInputFileContents, Func<string, IGenerator> getGenerator)
+        private string Gen(string bstrInputFileContents, Func<string, IGenerator> getGenerator)
         {
             string className;
             var head = GetHead(bstrInputFileContents, out className);
@@ -84,6 +95,22 @@
             }
 
             return head + str + GetFoot();
+        }
+
+        private string RemoveComments(string content)
+        {
+            var blockComments = @"/\*(.*?)\*/";
+            var lineComments = @"//(.*?)(\r?\n|$)";
+            //var strings = @"""((\\[^\n]|[^""\n])*)""";
+            //var verbatimStrings = @"@(""[^""]*"")+";
+
+            string noComments = Regex.Replace(
+                content,
+                blockComments + "|" + lineComments,// + "|" + strings + "|" + verbatimStrings,
+                Environment.NewLine,
+                RegexOptions.Singleline);
+
+            return noComments;
         }
 
         private List<AutoGenInfo> GetList(string bstrInputFileContents)
@@ -107,14 +134,18 @@
         {
             Regex nsRx = new Regex("namespace (.*)\r\n\\{");
             Regex usRx = new Regex("using .*;");
-            Regex clRx = new Regex(@"(?<class>.*class \w*)");
+            //Regex clRx = new Regex(@"(?<class>.*class \w*)");
             Regex pclRx = new Regex(@"(?<class>.*partial class \w*)");
             Regex pclnmRx = new Regex(@".*partial class (?<class>\w*)");
             Regex atRx = new Regex(@"^ *\[AutoGen(?<name>[\w\d]*)\((?<data>.*)\)\]", RegexOptions.Multiline);
 
             className = null;
 
-            if (clRx.Matches(bstrInputFileContents).Count > 1) return null;
+            //if (clRx.Matches(bstrInputFileContents).Count > 1)
+            //{
+            //    throw new Exception("more than one classes found in this file, this is not allowed!");
+            //}
+
             var cls = pclRx.Match(bstrInputFileContents).Groups["class"].Value;
             className = pclnmRx.Match(bstrInputFileContents).Groups["class"].Value;
             if (string.IsNullOrEmpty(cls)) return null;

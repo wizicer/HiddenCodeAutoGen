@@ -10,3 +10,5 @@ TestResults
 *.ncrunchsolution
 *.ncrunchsolution.user
 *.suo
+
+output*/

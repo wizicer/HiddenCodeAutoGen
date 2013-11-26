@@ -32,12 +32,14 @@ public class WpfInpcGenerator : IGenerator
                 OnPropertyChanged(""$property$"");
             }
         }
-
+    
         /// <summary>
         /// Invoked when the value of $property$ changes
         /// </summary>
         partial void On$property$Changed($type$ value);
 "
+            .Replace("\r", "")
+            .Replace("\n", "\r\n")
             .Replace("{", "{{")
             .Replace("}", "}}")
             .Replace("$property$", "{0}")
@@ -54,5 +56,20 @@ public class WpfInpcGenerator : IGenerator
             tp,
             "_" + pr.Substring(0, 1).ToLower() + pr.Substring(1),
             dv);
+    }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class AutoGenAttribute : Attribute
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoGenAttribute"/> class.
+        /// if the type is not string, the default value will remove the " on the begin and end
+        /// </summary>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="fieldType">Type of the field. only support typeof() method here</param>
+        /// <param name="defaultValue">The default value.</param>
+        public AutoGenAttribute(string fieldName, Type fieldType, object defaultValue)
+        {
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace UnitTests
     {
         private string _sourceCode = null;
         private string _generatedCode = null;
-        private string _generatorName = null;
+        //private string _generatorName = null;
 
 
         [Given(@"I have source code:")]
@@ -22,11 +22,11 @@ namespace UnitTests
             this._sourceCode = multilineText;
         }
 
-        [Given(@"I design to use (\w*) generator")]
-        public void GivenIDesignToUseDefaultGenerator(string generatorName)
-        {
-            this._generatorName = generatorName;
-        }
+        //[Given(@"I design to use (\w*) generator")]
+        //public void GivenIDesignToUseDefaultGenerator(string generatorName)
+        //{
+        //    this._generatorName = generatorName;
+        //}
 
         [When(@"I ask to generate")]
         public void WhenIAskToGenerate()
@@ -42,6 +42,7 @@ namespace UnitTests
             //    var autogen = new WpfInpcGenerator();
             //    this._generatedCode = g.Gen(this._sourceCode, s => s == "" ? (IGenerator)autogen : entitygen) ?? "";
             //}
+            //this._generatedCode = g.Gen(this._sourceCode, s => (IGenerator)( new CommandAutoGen()) );
             this._generatedCode = g.Gen(this._sourceCode) ?? string.Empty;
 
         }
@@ -61,7 +62,10 @@ namespace UnitTests
 
         private string Standardize(string input)
         {
-            return input.Trim().Replace("\r", "");
+            return input.Trim()
+                //.Replace("\t", "")
+                .Replace(" ", "")
+                .Replace("\r", "");
         }
     }
 }

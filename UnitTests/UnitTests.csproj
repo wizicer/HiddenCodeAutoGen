@@ -55,6 +55,9 @@
     <Compile Include="AutoGenDP.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="AutoGenCommand.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Generate.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

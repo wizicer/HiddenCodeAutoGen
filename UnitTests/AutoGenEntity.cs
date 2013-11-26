@@ -66,4 +66,20 @@ $insidector$
         }
         return last;
     }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class AutoGenEntityAttribute : Attribute
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoGenEntityAttribute"/> class.
+        /// if the type is not string, the default value will remove the " on the begin and end
+        /// </summary>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="fieldType">Type of the field. only support typeof() method here</param>
+        /// <param name="isPrivateSet">set to mark private before set</param>
+        /// <param name="defaultValue">The default value.</param>
+        public AutoGenEntityAttribute(string fieldName, Type fieldType, bool isPrivateSet, object defaultValue = null)
+        {
+        }
+    }
 }

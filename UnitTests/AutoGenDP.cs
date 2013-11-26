@@ -24,21 +24,23 @@ public class DPGenerator : IGenerator
         /// <summary>
         /// Defines the $property$ dependnecy property.
         /// </summary>
-        public static readonly DependencyProperty $property$Property =
-            DependencyProperty.Register(""$property$"", typeof($type$), typeof($containerType$),
-                new PropertyMetadata($defaultValue$, new PropertyChangedCallback(On$property$PropertyChanged)));
+        public static readonly System.Windows.DependencyProperty $property$Property =
+            System.Windows.DependencyProperty.Register(""$property$"", typeof($type$), typeof($containerType$),
+                new System.Windows.PropertyMetadata($defaultValue$, new System.Windows.PropertyChangedCallback(On$property$PropertyChanged)));
 
         /// <summary>
         /// Invoked when the $property$ property changes
         /// </summary>
-        partial void On$property$PropertyChanged(DependencyPropertyChangedEventArgs e);
+        partial void On$property$PropertyChanged(System.Windows.DependencyPropertyChangedEventArgs e);
 
-        private static void On$property$PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void On$property$PropertyChanged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             $containerType$ control = d as $containerType$;
             control.On$property$PropertyChanged(e);
         }
 "
+            .Replace("\r", "")
+            .Replace("\n", "\r\n")
             .Replace("{", "{{")
             .Replace("}", "}}")
             .Replace("$property$", "{0}")
@@ -55,5 +57,20 @@ public class DPGenerator : IGenerator
             type,
             defaultValue,
             className);
+    }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class AutoGenDPAttribute : Attribute
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoGenEntityAttribute"/> class.
+        /// if the type is not string, the default value will remove the " on the begin and end
+        /// </summary>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="fieldType">Type of the field. only support typeof() method here</param>
+        /// <param name="defaultValue">The default value.</param>
+        public AutoGenDPAttribute(string fieldName, Type fieldType, object defaultValue = null)
+        {
+        }
     }
 }
