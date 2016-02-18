@@ -38,9 +38,7 @@
                             string.Format("AutoGen{0}.cs", genName));
                         if (File.Exists(file))
                         {
-                            var eval = new MonoEvaluator();
-                            eval.Reset();
-                            var script = eval.LoadFile<IGenerator>(file);
+                            var script = CSScript.Evaluator.LoadFile<IGenerator>(file);
                             return script;
                         }
                         return null;
