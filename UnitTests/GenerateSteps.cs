@@ -10,6 +10,7 @@ namespace UnitTests
     {
         private string _sourceCode = null;
         private string _generatedCode = null;
+        private string _generatedCodeInternal = null;
         //private string _generatorName = null;
 
         [Given(@"I have source code:")]
@@ -38,13 +39,15 @@ namespace UnitTests
             //    this._generatedCode = g.Gen(this._sourceCode, s => s == "" ? (IGenerator)autogen : entitygen) ?? "";
             //}
             //this._generatedCode = g.Gen(this._sourceCode, s => (IGenerator)( new CommandAutoGen()) );
-            this._generatedCode = Gen(this._sourceCode) ?? string.Empty;
+            this._generatedCodeInternal = Gen(this._sourceCode) ?? string.Empty;
+            this._generatedCode = GeneratorAgent.Gen(this._sourceCode) ?? string.Empty;
         }
 
         [When(@"Remove comments before namespace")]
         public void WhenRemoveCommentsBeforeNamespace()
         {
             this._generatedCode = this._generatedCode.Substring(this._generatedCode.IndexOf("namespace"));
+            this._generatedCodeInternal = this._generatedCodeInternal.Substring(this._generatedCodeInternal.IndexOf("namespace"));
         }
 
         [Then(@"the result should be:")]
@@ -52,6 +55,7 @@ namespace UnitTests
         {
             var expectedCode = multilineText;
             Assert.AreEqual(Standardize(expectedCode), Standardize(this._generatedCode ?? string.Empty));
+            Assert.AreEqual(Standardize(expectedCode), Standardize(this._generatedCodeInternal ?? string.Empty));
         }
 
         private static string Gen(string inputFileContents)
