@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IcerWPFSmartGen;
+using Generator;
 
 namespace UnitTests
 {
@@ -31,7 +31,7 @@ namespace UnitTests
         [When(@"I ask to generate")]
         public void WhenIAskToGenerate()
         {
-            Generator g = new Generator();
+            var g = new GeneratorAgent();
             //if (this._generatorName == "default")
             //{
             //    this._generatedCode = g.Gen(this._sourceCode);
