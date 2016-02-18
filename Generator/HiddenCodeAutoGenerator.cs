@@ -1,4 +1,4 @@
-﻿namespace Generator
+namespace Generator
 {
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
@@ -28,13 +28,8 @@
                 throw new ArgumentNullException(nameof(inputFileContents));
             }
 
-            var gen = this.Gen(inputFileContents);
+            var gen = GeneratorAgent.Gen(inputFileContents);
             return gen == null ? new byte[] { } : Encoding.UTF8.GetBytes(gen);
-        }
-
-        private string Gen(string inputFileContents)
-        {
-            return GeneratorAgent.Gen(inputFileContents);
         }
 
         #endregion IVsSingleFileGenerator Members

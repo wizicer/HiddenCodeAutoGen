@@ -11,6 +11,18 @@
     using Contracts;
     public class GeneratorAgent
     {
+        private class ErrorGenerator : IGenerator
+        {
+            private string errorMessage;
+            public ErrorGenerator(string msg)
+            {
+                this.errorMessage = msg;
+            }
+            public string Generate(string className, IList<IList<string>> parameters)
+            {
+                return this.errorMessage;
+            }
+        }
 
         public static string Gen(string inputFileContents)
         {
@@ -19,15 +31,24 @@
                 var source = RemoveComments(inputFileContents);
                 return Gen(source, genName =>
                 {
-                    var file = Path.Combine(
-                        (new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location)).Directory.FullName,
-                        string.Format("AutoGen{0}.cs", genName));
-                    if (File.Exists(file))
+                    try
                     {
-                        IGenerator script = CSScript.Evaluator.LoadFile<IGenerator>(file);
-                        return script;
+                        var file = Path.Combine(
+                            (new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location)).Directory.FullName,
+                            string.Format("AutoGen{0}.cs", genName));
+                        if (File.Exists(file))
+                        {
+                            var eval = new MonoEvaluator();
+                            eval.Reset();
+                            var script = eval.LoadFile<IGenerator>(file);
+                            return script;
+                        }
+                        return null;
                     }
-                    return null;
+                    catch (Exception inex)
+                    {
+                        return new ErrorGenerator(string.Format("{0}/* Error when using [AutoGen{1}.cs]:{0}{2}{0}*/{0}", Environment.NewLine, genName, inex.Message));
+                    }
                 });
             }
             catch (Exception ex)

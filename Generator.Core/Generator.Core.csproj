@@ -76,7 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generator.cs" />
+    <Compile Include="GeneratorAgent.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

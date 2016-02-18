@@ -57,7 +57,7 @@
     <Compile Include="CodeGeneratorRegistrationAttribute.cs" />
     <Compile Include="CustomToolBase.cs" />
     <Compile Include="CustomToolPackage.cs" />
-    <Compile Include="Generator.cs" />
+    <Compile Include="HiddenCodeAutoGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
