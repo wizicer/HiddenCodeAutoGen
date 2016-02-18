@@ -10,8 +10,7 @@ namespace Generator
     [ComVisible(true)]
     [Guid("DC5BEA27-51D3-4330-9CB3-CB2F5FF7A014")]
     [ProvideObject(typeof(HiddenCodeAutoGenerator))]
-    [ProvideCodeGeneratorExtension("HiddenCodeAutoGenerator", ".cs")]
-    [VisualStudio.CodeGeneratorRegistration(typeof(HiddenCodeAutoGenerator), "HiddenCodeAutoGenerator", "{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}")]
+    [CodeGeneratorRegistration(typeof(HiddenCodeAutoGenerator), "HiddenCodeAutoGenerator", "{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}")]
     public class HiddenCodeAutoGenerator : CustomToolBase
     {
         #region IVsSingleFileGenerator Members
