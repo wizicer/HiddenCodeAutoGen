@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TechTalk.SpecFlow;
+﻿using Generator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Generator;
+using System;
+using TechTalk.SpecFlow;
 
 namespace UnitTests
 {
@@ -14,7 +11,6 @@ namespace UnitTests
         private string _sourceCode = null;
         private string _generatedCode = null;
         //private string _generatorName = null;
-
 
         [Given(@"I have source code:")]
         public void GivenIHaveSourceCode(string multilineText)
@@ -31,7 +27,6 @@ namespace UnitTests
         [When(@"I ask to generate")]
         public void WhenIAskToGenerate()
         {
-            var g = new GeneratorAgent();
             //if (this._generatorName == "default")
             //{
             //    this._generatedCode = g.Gen(this._sourceCode);
@@ -43,8 +38,7 @@ namespace UnitTests
             //    this._generatedCode = g.Gen(this._sourceCode, s => s == "" ? (IGenerator)autogen : entitygen) ?? "";
             //}
             //this._generatedCode = g.Gen(this._sourceCode, s => (IGenerator)( new CommandAutoGen()) );
-            this._generatedCode = g.Gen(this._sourceCode) ?? string.Empty;
-
+            this._generatedCode = Gen(this._sourceCode) ?? string.Empty;
         }
 
         [When(@"Remove comments before namespace")]
@@ -58,6 +52,38 @@ namespace UnitTests
         {
             var expectedCode = multilineText;
             Assert.AreEqual(Standardize(expectedCode), Standardize(this._generatedCode ?? string.Empty));
+        }
+
+        private static string Gen(string inputFileContents)
+        {
+            try
+            {
+                var source = GeneratorAgent.RemoveComments(inputFileContents);
+                return GeneratorAgent.Gen(source, genName =>
+                {
+                    switch (genName)
+                    {
+                        case "Command":
+                            return new CommandAutoGen();
+
+                        case "DP":
+                            return new DPGenerator();
+
+                        case "Entity":
+                            return new AutoGenEntity();
+
+                        case "":
+                            return new WpfInpcGenerator();
+
+                        default:
+                            return null;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return string.Format("/*\r\n{0}\r\n*/", ex.ToString());
+            }
         }
 
         private string Standardize(string input)

@@ -12,7 +12,7 @@
     public class GeneratorAgent
     {
 
-        public string Gen(string inputFileContents)
+        public static string Gen(string inputFileContents)
         {
             try
             {
@@ -36,12 +36,12 @@
             }
         }
 
-        private string Gen(string bstrInputFileContents, Func<string, IGenerator> getGenerator)
+        public static string Gen(string inputFileContents, Func<string, IGenerator> getGenerator)
         {
             string className;
-            var head = GetHead(bstrInputFileContents, out className);
+            var head = GetHead(inputFileContents, out className);
             if (head == null) return null;
-            var par = GetList(bstrInputFileContents);
+            var par = GetList(inputFileContents);
 
             var str = string.Empty;
 
@@ -58,7 +58,7 @@
             return head + str + GetFoot();
         }
 
-        private string RemoveComments(string content)
+        public static string RemoveComments(string content)
         {
             var blockComments = @"/\*(.*?)\*/";
             var lineComments = @"//(.*?)(\r?\n|$)";
@@ -74,7 +74,7 @@
             return noComments;
         }
 
-        private List<AutoGenInfo> GetList(string bstrInputFileContents)
+        private static List<AutoGenInfo> GetList(string bstrInputFileContents)
         {
             Regex atRx = new Regex(@"^\s*\[AutoGen(?<name>[\w\d]*)\((?<data>.*)\)\]", RegexOptions.Multiline);
             Regex clRx = new Regex(@"( *\[[\w\d]*\(.*\)\]\s*){1,}
@@ -91,7 +91,7 @@
                 .ToList();
         }
 
-        private string GetHead(string bstrInputFileContents, out string className)
+        private static string GetHead(string bstrInputFileContents, out string className)
         {
             Regex nsRx = new Regex("namespace (.*)\r\n\\{");
             Regex usRx = new Regex("using .*;");
@@ -137,7 +137,7 @@
             return fs.ToString();
         }
 
-        private string GetFoot()
+        private static string GetFoot()
         {
             StringBuilder fs = new StringBuilder();
 

@@ -34,8 +34,7 @@
 
         private string Gen(string inputFileContents)
         {
-            var gen = new GeneratorAgent();
-            return gen.Gen(inputFileContents);
+            return GeneratorAgent.Gen(inputFileContents);
         }
 
         #endregion IVsSingleFileGenerator Members

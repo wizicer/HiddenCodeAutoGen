@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Generator.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnitTests.Contracts;
 
 public class CommandAutoGen : IGenerator
 {
