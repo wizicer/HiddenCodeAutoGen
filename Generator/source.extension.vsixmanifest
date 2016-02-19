@@ -5,6 +5,7 @@
     <DisplayName>Hidden Code Auto Generator</DisplayName>
     <Description xml:space="preserve">Helper Generator to generate varies of hidden code which we shouldn't care about.</Description>
     <MoreInfo>https://github.com/wizicer/HiddenCodeAutoGen</MoreInfo>
+    <License>copyright.txt</License>
   </Metadata>
   <Installation>
     <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Community" />

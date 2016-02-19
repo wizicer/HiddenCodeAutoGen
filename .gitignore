@@ -243,4 +243,4 @@ _Pvt_Extensions
 *.sln.iml
 
 
-output*/
+/HiddenCodeAutoGenerator.vsix
