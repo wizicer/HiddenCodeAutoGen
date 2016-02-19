@@ -1,0 +1,45 @@
+// -----------------------------------------------------------------------
+// <copyright file="WireBaseViewModel.cs" company="Yours">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Chart.VMWire.ViewModel
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class AutoGenAttribute : Attribute
+    {
+        public string FieldName { get; private set; }
+        public string BackFieldName { get; private set; }
+        public Type FieldType { get; private set; }
+        public object DefaultValue { get; private set; }
+
+        public AutoGenAttribute(string fieldName, Type fieldType, object defaultValue)
+            : this(fieldName, "_" + fieldName.Substring(0, 1).ToLower() + fieldName.Substring(1), fieldType, defaultValue)
+        {
+        }
+
+        public AutoGenAttribute(string fieldName, string backFieldName, Type fieldType, object defaultValue)
+        {
+            this.FieldName = fieldName;
+            this.BackFieldName = backFieldName;
+            this.FieldType = fieldType;
+            this.DefaultValue = defaultValue;
+        }
+    }
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    [AutoGen("WireData", typeof(SquarePolyline), null)]
+    [AutoGen("Visibility", typeof(Visibility), Visibility.Hidden)]
+    public partial class WireBaseViewModel : ViewModelBase
+    {
+    }
+}

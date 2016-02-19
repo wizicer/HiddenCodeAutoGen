@@ -1,59 +1,37 @@
-﻿using Generator;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using TechTalk.SpecFlow;
-
-namespace UnitTests
+﻿namespace UnitTests
 {
+    using Generator;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.IO;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class GenerateSteps
     {
         private string _sourceCode = null;
         private string _generatedCode = null;
         private string _generatedCodeInternal = null;
-        //private string _generatorName = null;
-
-        [Given(@"I have source code:")]
-        public void GivenIHaveSourceCode(string multilineText)
-        {
-            this._sourceCode = multilineText;
-        }
-
-        //[Given(@"I design to use (\w*) generator")]
-        //public void GivenIDesignToUseDefaultGenerator(string generatorName)
-        //{
-        //    this._generatorName = generatorName;
-        //}
+        private string _basePath = @"testcases\";
 
         [When(@"I ask to generate")]
         public void WhenIAskToGenerate()
         {
-            //if (this._generatorName == "default")
-            //{
-            //    this._generatedCode = g.Gen(this._sourceCode);
-            //}
-            //else
-            //{
-            //    var entitygen = new AutoGenEntity();
-            //    var autogen = new WpfInpcGenerator();
-            //    this._generatedCode = g.Gen(this._sourceCode, s => s == "" ? (IGenerator)autogen : entitygen) ?? "";
-            //}
-            //this._generatedCode = g.Gen(this._sourceCode, s => (IGenerator)( new CommandAutoGen()) );
             this._generatedCodeInternal = Gen(this._sourceCode) ?? string.Empty;
             this._generatedCode = GeneratorAgent.Gen(this._sourceCode) ?? string.Empty;
         }
 
-        [When(@"Remove comments before namespace")]
-        public void WhenRemoveCommentsBeforeNamespace()
+        [Given(@"I have source code in file (.*)")]
+        public void GivenIHaveSourceCodeInFile(string filename)
         {
-            this._generatedCode = this._generatedCode.Substring(this._generatedCode.IndexOf("namespace"));
-            this._generatedCodeInternal = this._generatedCodeInternal.Substring(this._generatedCodeInternal.IndexOf("namespace"));
+            var source = File.ReadAllText(Path.Combine(this._basePath, filename));
+            this._sourceCode = source;
         }
 
-        [Then(@"the result should be:")]
-        public void ThenTheResultShouldBe(string multilineText)
+        [Then(@"the result should be like in file (.*)")]
+        public void ThenTheResultShouldBeLikeInFile(string filename)
         {
-            var expectedCode = multilineText;
+            var expectedCode = File.ReadAllText(Path.Combine(this._basePath, filename));
             Assert.AreEqual(Standardize(expectedCode), Standardize(this._generatedCode ?? string.Empty));
             Assert.AreEqual(Standardize(expectedCode), Standardize(this._generatedCodeInternal ?? string.Empty));
         }

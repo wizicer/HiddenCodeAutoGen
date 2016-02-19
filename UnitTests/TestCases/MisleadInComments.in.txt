@@ -1,0 +1,125 @@
+// -----------------------------------------------------------------------
+// <copyright Yours INC. file="COMViewModel.cs" company="Yours">
+//     Copyright 2013 Yours INC.
+//     All Rights Reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+namespace Yours.ACS.RTU.Studio.GUI.ViewModel.Tab
+{
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
+
+    /// <summary>
+    /// Class COMViewModel. This class cannot be inherited.
+    /// </summary>
+    [AutoGen("COMName", typeof(string), "")]
+    [AutoGen("FlowControlVisibility", typeof(string), "Visible")]
+    public sealed partial class COMViewModel : AutoSyncViewModel<StationSerial, BasicConfigItemViewModel>
+    {
+        /////// <summary>
+        /////// The add command
+        /////// </summary>
+        ////private RelayCommand addCommand;
+
+        /////// <summary>
+        /////// The delete command
+        /////// </summary>
+        ////private RelayCommand delCommand;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="COMViewModel"/> class.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <exception cref="System.ArgumentException"></exception>
+        public COMViewModel(object model)
+            : base(model)
+        {
+            var pn = this.Model.PortName;
+            switch (pn)
+            {
+                case PortName.COM1:
+                    this.COMType = PortType.RS232.ToString();
+                    this.COMName = pn.ToString();
+                    break;
+
+                case PortName.COM2:
+                    this.COMType = PortType.RS232.ToString();
+                    this.COMName = pn.ToString();
+                    break;
+
+                case PortName.COM3:
+                    this.COMType = PortType.RS485.ToString();
+                    this.COMName = pn.ToString();
+                    this.FlowControlVisibility = "Hidden";
+                    break;
+
+                case PortName.COM4:
+                    this.COMType = PortType.RS485.ToString();
+                    this.COMName = pn.ToString();
+                    this.FlowControlVisibility = "Hidden";
+                    break;
+
+                default:
+                    throw new ArgumentException();
+            }
+
+            this.DisplayName = pn.ToString();
+        }
+
+        /////// <summary>
+        /////// Gets the add command.
+        /////// </summary>
+        /////// <value>The add command.</value>
+        ////public ICommand AddCommand
+        ////{
+        ////    get { return this.addCommand ?? (this.addCommand = new RelayCommand(this.AddNew)); }
+        ////}
+
+        /////// <summary>
+        /////// Gets the delete command.
+        /////// </summary>
+        /////// <value>The delete command.</value>
+        ////public ICommand DelCommand
+        ////{
+        ////    get { return this.delCommand ?? (this.delCommand = new RelayCommand(this.Delete)); }
+        ////}
+
+        /// <summary>
+        /// Regs this instance.
+        /// </summary>
+        protected override void Reg()
+        {
+            this.Register("PortProtocol");
+            this.Register("BaudRate");
+            this.Register("Parity");
+            this.Register("DataBits");
+            this.Register("StopBits");
+            this.Register("FlowControl", "FlowCtrl");
+            this.Register("PortName");
+        }
+
+        /////// <summary>
+        /////// Adds the new.
+        /////// </summary>
+        /////// <param name="obj">The object.</param>
+        ////private void AddNew(object obj)
+        ////{
+        ////    ////ModbusMasterViewModel newItem = new ModbusMasterViewModel();
+        ////    newItem.ID = this.Parent.GetModbusMasterGlobalID() + 1;
+        ////    this.ModbusMasterConfigurationList.Add(newItem);
+        ////}
+
+        /////// <summary>
+        /////// Deletes the specified object.
+        /////// </summary>
+        /////// <param name="obj">The object.</param>
+        ////private void Delete(object obj)
+        ////{
+        ////    if (this.SelectedModbusMasterConfiguration != null)
+        ////    {
+        ////        this.ModbusMasterConfigurationList.Remove(this.SelectedModbusMasterConfiguration);
+        ////    }
+        ////}
+    }
+}

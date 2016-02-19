@@ -68,489 +68,103 @@ namespace UnitTests
             testRunner.CollectScenarioErrors();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("No partial class")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void NoPartialClass()
+        public virtual void GenerateCode(string input, string output, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No partial class", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("generate code", exampleTags);
 #line 6
 this.ScenarioSetup(scenarioInfo);
-#line hidden
 #line 7
-    testRunner.Given("I have source code:", @"// -----------------------------------------------------------------------
-// <copyright file=""WireEditingViewModel.cs"" company=""Honeywell"">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Chart.VMWire.ViewModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    public class WireEditingViewModel : WireBaseViewModel
-    {
-    }
-}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+    testRunner.Given(string.Format("I have source code in file {0}", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 8
     testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 31
-    testRunner.Then("the result should be:", "", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 9
+    testRunner.Then(string.Format("the result should be like in file {0}", output), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("multiple class")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: AutogenCommand.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void MultipleClass()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "AutogenCommand.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "AutogenCommand.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "AutogenCommand.out.txt")]
+        public virtual void GenerateCode_AutogenCommand_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("multiple class", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("AutogenCommand.in.txt", "AutogenCommand.out.txt", ((string[])(null)));
 #line hidden
-#line 36
-    testRunner.Given("I have source code:", "// -----------------------------------------------------------------------\r\n// <c" +
-                    "opyright file=\"WireBaseViewModel.cs\" company=\"Honeywell\">\r\n// TODO: Update copyr" +
-                    "ight text.\r\n// </copyright>\r\n// ------------------------------------------------" +
-                    "-----------------------\r\n\r\nnamespace Chart.VMWire.ViewModel\r\n{\r\n    using System" +
-                    ";\r\n    using System.Collections.Generic;\r\n    using System.Linq;\r\n    using Syst" +
-                    "em.Text;\r\n    using System.Windows;\r\n\r\n    [AttributeUsage(AttributeTargets.Clas" +
-                    "s, Inherited = false, AllowMultiple = true)]\r\n    public sealed class AutoGenAtt" +
-                    "ribute : Attribute\r\n    {\r\n        public string FieldName { get; private set; }" +
-                    "\r\n        public string BackFieldName { get; private set; }\r\n        public Type" +
-                    " FieldType { get; private set; }\r\n        public object DefaultValue { get; priv" +
-                    "ate set; }\r\n\r\n        public AutoGenAttribute(string fieldName, Type fieldType, " +
-                    "object defaultValue)\r\n            : this(fieldName, \"_\" + fieldName.Substring(0," +
-                    " 1).ToLower() + fieldName.Substring(1), fieldType, defaultValue)\r\n        {\r\n   " +
-                    "     }\r\n\r\n        public AutoGenAttribute(string fieldName, string backFieldName" +
-                    ", Type fieldType, object defaultValue)\r\n        {\r\n            this.FieldName = " +
-                    "fieldName;\r\n            this.BackFieldName = backFieldName;\r\n            this.Fi" +
-                    "eldType = fieldType;\r\n            this.DefaultValue = defaultValue;\r\n        }\r\n" +
-                    "    }\r\n\r\n    /// <summary>\r\n    /// TODO: Update summary.\r\n    /// </summary>\r\n " +
-                    "   [AutoGen(\"WireData\", typeof(SquarePolyline), null)]\r\n    [AutoGen(\"Visibility" +
-                    "\", typeof(Visibility), Visibility.Hidden)]\r\n    public partial class WireBaseVie" +
-                    "wModel : ViewModelBase\r\n    {\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 84
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 85
-    testRunner.Then("the result should be:", "// -----------------------------------------------------------------------\r\n// Au" +
-                    "to generated by Hidden Code Auto Generator\r\n// Don\'t modify this file manually!\r" +
-                    "\n// <auto-generated />\r\n// -----------------------------------------------------" +
-                    "------------------\r\n\r\nnamespace Chart.VMWire.ViewModel\r\n{\r\n    using System;\r\n  " +
-                    "  using System.Collections.Generic;\r\n    using System.Linq;\r\n    using System.Te" +
-                    "xt;\r\n    using System.Windows;\r\n\r\n    public partial class WireBaseViewModel\r\n  " +
-                    "  {\r\n        /// <summary>\r\n        /// Field which backs the WireData property\r" +
-                    "\n        /// </summary>\r\n        private SquarePolyline _wireData = null;\r\n\r\n   " +
-                    "     /// <summary>\r\n        /// Gets / sets the WireData value\r\n        /// </su" +
-                    "mmary>\r\n        public SquarePolyline WireData\r\n        {\r\n            get { ret" +
-                    "urn _wireData; }\r\n            set\r\n            {\r\n                if (_wireData " +
-                    "== value) return;\r\n                _wireData = value;\r\n\r\n                OnWireD" +
-                    "ataChanged(value);\r\n                OnPropertyChanged(\"WireData\");\r\n            " +
-                    "}\r\n        }\r\n\r\n        /// <summary>\r\n        /// Invoked when the value of Wir" +
-                    "eData changes\r\n        /// </summary>\r\n        partial void OnWireDataChanged(Sq" +
-                    "uarePolyline value);\r\n        /// <summary>\r\n        /// Field which backs the V" +
-                    "isibility property\r\n        /// </summary>\r\n        private Visibility _visibili" +
-                    "ty = Visibility.Hidden;\r\n\r\n        /// <summary>\r\n        /// Gets / sets the Vi" +
-                    "sibility value\r\n        /// </summary>\r\n        public Visibility Visibility\r\n  " +
-                    "      {\r\n            get { return _visibility; }\r\n            set\r\n            {" +
-                    "\r\n                if (_visibility == value) return;\r\n                _visibility" +
-                    " = value;\r\n\r\n                OnVisibilityChanged(value);\r\n                OnProp" +
-                    "ertyChanged(\"Visibility\");\r\n            }\r\n        }\r\n\r\n        /// <summary>\r\n " +
-                    "       /// Invoked when the value of Visibility changes\r\n        /// </summary>\r" +
-                    "\n        partial void OnVisibilityChanged(Visibility value);\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("standard autogen (only one type of AutoGen)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: AutogenDP.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void StandardAutogenOnlyOneTypeOfAutoGen()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "AutogenDP.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "AutogenDP.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "AutogenDP.out.txt")]
+        public virtual void GenerateCode_AutogenDP_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("standard autogen (only one type of AutoGen)", ((string[])(null)));
-#line 157
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("AutogenDP.in.txt", "AutogenDP.out.txt", ((string[])(null)));
 #line hidden
-#line 158
-    testRunner.Given("I have source code:", @"// -----------------------------------------------------------------------
-// <copyright file=""WireBaseViewModel.cs"" company=""Honeywell"">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Chart.VMWire.ViewModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows;
-
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    [AutoGen(""WireData"", typeof(string), ""null"")]
-    [AutoGen(""Visibility"", typeof(Visibility), ""Visibility.Hidden"")]
-    public partial class WireBaseViewModel : ViewModelBase
-    {
-    }
-}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 184
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 185
-    testRunner.And("Remove comments before namespace", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 186
-    testRunner.Then("the result should be:", "namespace Chart.VMWire.ViewModel\r\n{\r\n    using System;\r\n    using System.Collecti" +
-                    "ons.Generic;\r\n    using System.Linq;\r\n    using System.Text;\r\n    using System.W" +
-                    "indows;\r\n\r\n    public partial class WireBaseViewModel\r\n    {\r\n        /// <summa" +
-                    "ry>\r\n        /// Field which backs the WireData property\r\n        /// </summary>" +
-                    "\r\n        private string _wireData = \"null\";\r\n\r\n        /// <summary>\r\n        /" +
-                    "// Gets / sets the WireData value\r\n        /// </summary>\r\n        public string" +
-                    " WireData\r\n        {\r\n            get { return _wireData; }\r\n            set\r\n  " +
-                    "          {\r\n                if (_wireData == value) return;\r\n                _w" +
-                    "ireData = value;\r\n\r\n                OnWireDataChanged(value);\r\n                O" +
-                    "nPropertyChanged(\"WireData\");\r\n            }\r\n        }\r\n\r\n        /// <summary>" +
-                    "\r\n        /// Invoked when the value of WireData changes\r\n        /// </summary>" +
-                    "\r\n        partial void OnWireDataChanged(string value);\r\n        /// <summary>\r\n" +
-                    "        /// Field which backs the Visibility property\r\n        /// </summary>\r\n " +
-                    "       private Visibility _visibility = Visibility.Hidden;\r\n\r\n        /// <summa" +
-                    "ry>\r\n        /// Gets / sets the Visibility value\r\n        /// </summary>\r\n     " +
-                    "   public Visibility Visibility\r\n        {\r\n            get { return _visibility" +
-                    "; }\r\n            set\r\n            {\r\n                if (_visibility == value) r" +
-                    "eturn;\r\n                _visibility = value;\r\n\r\n                OnVisibilityChan" +
-                    "ged(value);\r\n                OnPropertyChanged(\"Visibility\");\r\n            }\r\n  " +
-                    "      }\r\n\r\n        /// <summary>\r\n        /// Invoked when the value of Visibili" +
-                    "ty changes\r\n        /// </summary>\r\n        partial void OnVisibilityChanged(Vis" +
-                    "ibility value);\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("mixed type of autogen")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MisleadInComments.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void MixedTypeOfAutogen()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MisleadInComments.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MisleadInComments.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MisleadInComments.out.txt")]
+        public virtual void GenerateCode_MisleadInComments_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("mixed type of autogen", ((string[])(null)));
-#line 252
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("MisleadInComments.in.txt", "MisleadInComments.out.txt", ((string[])(null)));
 #line hidden
-#line 253
-    testRunner.Given("I have source code:", @"// -----------------------------------------------------------------------
-// <copyright file=""WireBaseViewModel.cs"" company=""Honeywell"">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Chart.VMWire.ViewModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows;
-
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    [AutoGenEntity(""WireData"", typeof(string), false)]
-    [AutoGenEntity(""Visibility"", typeof(Visibility), true, ""Visibility.Hidden"")]
-    [AutoGen(""WireInfo"", typeof(string), ""null"")]
-    public partial class WireBaseViewModel : ViewModelBase
-    {
-    }
-}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 280
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 281
-    testRunner.Then("the result should be:", "// -----------------------------------------------------------------------\r\n// Au" +
-                    "to generated by Hidden Code Auto Generator\r\n// Don\'t modify this file manually!\r" +
-                    "\n// <auto-generated />\r\n// -----------------------------------------------------" +
-                    "------------------\r\n\r\nnamespace Chart.VMWire.ViewModel\r\n{\r\n    using System;\r\n  " +
-                    "  using System.Collections.Generic;\r\n    using System.Linq;\r\n    using System.Te" +
-                    "xt;\r\n    using System.Windows;\r\n\r\n    public partial class WireBaseViewModel\r\n  " +
-                    "  {\r\n        public string WireData { get; set; }\r\n        public Visibility Vis" +
-                    "ibility { get; private set; }\r\n\r\n        public WireBaseViewModel(string wireDat" +
-                    "a, Visibility visibility = Visibility.Hidden)\r\n        {\r\n            this.WireD" +
-                    "ata = wireData;\r\n            this.Visibility = visibility;\r\n        }\r\n        /" +
-                    "// <summary>\r\n        /// Field which backs the WireInfo property\r\n        /// <" +
-                    "/summary>\r\n        private string _wireInfo = \"null\";\r\n\r\n        /// <summary>\r\n" +
-                    "        /// Gets / sets the WireInfo value\r\n        /// </summary>\r\n        publ" +
-                    "ic string WireInfo\r\n        {\r\n            get { return _wireInfo; }\r\n          " +
-                    "  set\r\n            {\r\n                if (_wireInfo == value) return;\r\n         " +
-                    "       _wireInfo = value;\r\n\r\n                OnWireInfoChanged(value);\r\n        " +
-                    "        OnPropertyChanged(\"WireInfo\");\r\n            }\r\n        }\r\n\r\n        /// " +
-                    "<summary>\r\n        /// Invoked when the value of WireInfo changes\r\n        /// <" +
-                    "/summary>\r\n        partial void OnWireInfoChanged(string value);\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("autogen dp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MixedTypeAutogen.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void AutogenDp()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MixedTypeAutogen.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MixedTypeAutogen.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MixedTypeAutogen.out.txt")]
+        public virtual void GenerateCode_MixedTypeAutogen_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("autogen dp", ((string[])(null)));
-#line 336
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("MixedTypeAutogen.in.txt", "MixedTypeAutogen.out.txt", ((string[])(null)));
 #line hidden
-#line 337
-    testRunner.Given("I have source code:", @"// -----------------------------------------------------------------------
-// <copyright file=""WireBaseViewModel.cs"" company=""Honeywell"">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Chart.VMWire.ViewModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows;
-
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    [AutoGenDP(""WireInfo"", typeof(string), ""null"")]
-    [AutoGenDP(""WireInfo2"", typeof(Wire), ""new Wire()"")]
-    public partial class WireBaseViewModel : ViewModelBase
-    {
-    }
-}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 363
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 364
-    testRunner.Then("the result should be:", "// -----------------------------------------------------------------------\r\n// Au" +
-                    "to generated by Hidden Code Auto Generator\r\n// Don\'t modify this file manually!\r" +
-                    "\n// <auto-generated />\r\n// -----------------------------------------------------" +
-                    "------------------\r\n\r\nnamespace Chart.VMWire.ViewModel\r\n{\r\n    using System;\r\n  " +
-                    "  using System.Collections.Generic;\r\n    using System.Linq;\r\n    using System.Te" +
-                    "xt;\r\n    using System.Windows;\r\n\r\n    public partial class WireBaseViewModel\r\n  " +
-                    "  {\r\n        /// <summary>\r\n        /// Gets / sets the WireInfo property value," +
-                    " This is a dependency property\r\n        /// </summary>\r\n        public string Wi" +
-                    "reInfo\r\n        {\r\n            get { return (string)GetValue(WireInfoProperty); " +
-                    "}\r\n            set { SetValue(WireInfoProperty, value); }\r\n        }\r\n\r\n        " +
-                    "/// <summary>\r\n        /// Defines the WireInfo dependnecy property.\r\n        //" +
-                    "/ </summary>\r\n        public static readonly System.Windows.DependencyProperty W" +
-                    "ireInfoProperty =\r\n            System.Windows.DependencyProperty.Register(\"WireI" +
-                    "nfo\", typeof(string), typeof(WireBaseViewModel),\r\n                new System.Win" +
-                    "dows.PropertyMetadata(\"null\", new System.Windows.PropertyChangedCallback(OnWireI" +
-                    "nfoPropertyChanged)));\r\n\r\n        /// <summary>\r\n        /// Invoked when the Wi" +
-                    "reInfo property changes\r\n        /// </summary>\r\n        partial void OnWireInfo" +
-                    "PropertyChanged(System.Windows.DependencyPropertyChangedEventArgs e);\r\n\r\n       " +
-                    " private static void OnWireInfoPropertyChanged(System.Windows.DependencyObject d" +
-                    ", System.Windows.DependencyPropertyChangedEventArgs e)\r\n        {\r\n            W" +
-                    "ireBaseViewModel control = d as WireBaseViewModel;\r\n            control.OnWireIn" +
-                    "foPropertyChanged(e);\r\n        }\r\n        /// <summary>\r\n        /// Gets / sets" +
-                    " the WireInfo2 property value, This is a dependency property\r\n        /// </summ" +
-                    "ary>\r\n        public Wire WireInfo2\r\n        {\r\n            get { return (Wire)G" +
-                    "etValue(WireInfo2Property); }\r\n            set { SetValue(WireInfo2Property, val" +
-                    "ue); }\r\n        }\r\n\r\n        /// <summary>\r\n        /// Defines the WireInfo2 de" +
-                    "pendnecy property.\r\n        /// </summary>\r\n        public static readonly Syste" +
-                    "m.Windows.DependencyProperty WireInfo2Property =\r\n            System.Windows.Dep" +
-                    "endencyProperty.Register(\"WireInfo2\", typeof(Wire), typeof(WireBaseViewModel),\r\n" +
-                    "                new System.Windows.PropertyMetadata(new Wire(), new System.Windo" +
-                    "ws.PropertyChangedCallback(OnWireInfo2PropertyChanged)));\r\n\r\n        /// <summar" +
-                    "y>\r\n        /// Invoked when the WireInfo2 property changes\r\n        /// </summa" +
-                    "ry>\r\n        partial void OnWireInfo2PropertyChanged(System.Windows.DependencyPr" +
-                    "opertyChangedEventArgs e);\r\n\r\n        private static void OnWireInfo2PropertyCha" +
-                    "nged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChanged" +
-                    "EventArgs e)\r\n        {\r\n            WireBaseViewModel control = d as WireBaseVi" +
-                    "ewModel;\r\n            control.OnWireInfo2PropertyChanged(e);\r\n        }\r\n    }\r\n" +
-                    "}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("mislead in comments")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MultipleClass.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void MisleadInComments()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MultipleClass.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MultipleClass.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MultipleClass.out.txt")]
+        public virtual void GenerateCode_MultipleClass_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("mislead in comments", ((string[])(null)));
-#line 438
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("MultipleClass.in.txt", "MultipleClass.out.txt", ((string[])(null)));
 #line hidden
-#line 439
-    testRunner.Given("I have source code:", "// -----------------------------------------------------------------------\r\n// <c" +
-                    "opyright HONEYWELL INC. file=\"COMViewModel.cs\" company=\"Honeywell\">\r\n//     Copy" +
-                    "right 2013 HONEYWELL INC.\r\n//     All Rights Reserved.\r\n// </copyright>\r\n// ----" +
-                    "-------------------------------------------------------------------\r\nnamespace H" +
-                    "oneywell.ACS.RTU.Studio.GUI.ViewModel.Tab\r\n{\r\n    using System;\r\n    using Syste" +
-                    "m.Collections.ObjectModel;\r\n    using System.Windows.Input;\r\n    using Honeywell" +
-                    ".ACS.RTU.Studio.BuilderModel;\r\n    using Honeywell.ACS.RTU.Studio.Enums;\r\n    us" +
-                    "ing Honeywell.ACS.RTU.Studio.GUI.Resources;\r\n    using Honeywell.ACS.RTU.Studio." +
-                    "GUI.ViewModel.Tree;\r\n    using Honeywell.ACS.RTU.Studio.Infrastructure.MVVM;\r\n\r\n" +
-                    "    /// <summary>\r\n    /// Class COMViewModel. This class cannot be inherited.\r\n" +
-                    "    /// </summary>\r\n    [AutoGen(\"COMName\", typeof(string), \"\")]\r\n    [AutoGen(\"" +
-                    "FlowControlVisibility\", typeof(string), \"Visible\")]\r\n    public sealed partial c" +
-                    "lass COMViewModel : AutoSyncViewModel<StationSerial, BasicConfigItemViewModel>\r\n" +
-                    "    {\r\n        /////// <summary>\r\n        /////// The add command\r\n        /////" +
-                    "// </summary>\r\n        ////private RelayCommand addCommand;\r\n\r\n        /////// <" +
-                    "summary>\r\n        /////// The delete command\r\n        /////// </summary>\r\n      " +
-                    "  ////private RelayCommand delCommand;\r\n\r\n        /// <summary>\r\n        /// Ini" +
-                    "tializes a new instance of the <see cref=\"COMViewModel\"/> class.\r\n        /// </" +
-                    "summary>\r\n        /// <param name=\"model\">The model.</param>\r\n        /// <excep" +
-                    "tion cref=\"System.ArgumentException\"></exception>\r\n        public COMViewModel(o" +
-                    "bject model)\r\n            : base(model)\r\n        {\r\n            var pn = this.Mo" +
-                    "del.PortName;\r\n            switch (pn)\r\n            {\r\n                case Port" +
-                    "Name.COM1:\r\n                    this.COMType = PortType.RS232.ToString();\r\n     " +
-                    "               this.COMName = pn.ToString();\r\n                    break;\r\n\r\n    " +
-                    "            case PortName.COM2:\r\n                    this.COMType = PortType.RS2" +
-                    "32.ToString();\r\n                    this.COMName = pn.ToString();\r\n             " +
-                    "       break;\r\n\r\n                case PortName.COM3:\r\n                    this.C" +
-                    "OMType = PortType.RS485.ToString();\r\n                    this.COMName = pn.ToStr" +
-                    "ing();\r\n                    this.FlowControlVisibility = \"Hidden\";\r\n            " +
-                    "        break;\r\n\r\n                case PortName.COM4:\r\n                    this." +
-                    "COMType = PortType.RS485.ToString();\r\n                    this.COMName = pn.ToSt" +
-                    "ring();\r\n                    this.FlowControlVisibility = \"Hidden\";\r\n           " +
-                    "         break;\r\n\r\n                default:\r\n                    throw new Argum" +
-                    "entException();\r\n            }\r\n\r\n            this.DisplayName = pn.ToString();\r" +
-                    "\n        }\r\n\r\n        /////// <summary>\r\n        /////// Gets the add command.\r\n" +
-                    "        /////// </summary>\r\n        /////// <value>The add command.</value>\r\n   " +
-                    "     ////public ICommand AddCommand\r\n        ////{\r\n        ////    get { return" +
-                    " this.addCommand ?? (this.addCommand = new RelayCommand(this.AddNew)); }\r\n      " +
-                    "  ////}\r\n\r\n        /////// <summary>\r\n        /////// Gets the delete command.\r\n" +
-                    "        /////// </summary>\r\n        /////// <value>The delete command.</value>\r\n" +
-                    "        ////public ICommand DelCommand\r\n        ////{\r\n        ////    get { ret" +
-                    "urn this.delCommand ?? (this.delCommand = new RelayCommand(this.Delete)); }\r\n   " +
-                    "     ////}\r\n\r\n        /// <summary>\r\n        /// Regs this instance.\r\n        //" +
-                    "/ </summary>\r\n        protected override void Reg()\r\n        {\r\n            this" +
-                    ".Register(\"PortProtocol\");\r\n            this.Register(\"BaudRate\");\r\n            " +
-                    "this.Register(\"Parity\");\r\n            this.Register(\"DataBits\");\r\n            th" +
-                    "is.Register(\"StopBits\");\r\n            this.Register(\"FlowControl\", \"FlowCtrl\");\r" +
-                    "\n            this.Register(\"PortName\");\r\n        }\r\n\r\n        /////// <summary>\r" +
-                    "\n        /////// Adds the new.\r\n        /////// </summary>\r\n        /////// <par" +
-                    "am name=\"obj\">The object.</param>\r\n        ////private void AddNew(object obj)\r\n" +
-                    "        ////{\r\n        ////    ////ModbusMasterViewModel newItem = new ModbusMas" +
-                    "terViewModel();\r\n        ////    newItem.ID = this.Parent.GetModbusMasterGlobalI" +
-                    "D() + 1;\r\n        ////    this.ModbusMasterConfigurationList.Add(newItem);\r\n    " +
-                    "    ////}\r\n\r\n        /////// <summary>\r\n        /////// Deletes the specified ob" +
-                    "ject.\r\n        /////// </summary>\r\n        /////// <param name=\"obj\">The object." +
-                    "</param>\r\n        ////private void Delete(object obj)\r\n        ////{\r\n        //" +
-                    "//    if (this.SelectedModbusMasterConfiguration != null)\r\n        ////    {\r\n  " +
-                    "      ////        this.ModbusMasterConfigurationList.Remove(this.SelectedModbusM" +
-                    "asterConfiguration);\r\n        ////    }\r\n        ////}\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 572
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 573
-    testRunner.Then("the result should be:", "// -----------------------------------------------------------------------\r\n// Au" +
-                    "to generated by Hidden Code Auto Generator\r\n// Don\'t modify this file manually!\r" +
-                    "\n// <auto-generated />\r\n// -----------------------------------------------------" +
-                    "------------------\r\n\r\nnamespace Honeywell.ACS.RTU.Studio.GUI.ViewModel.Tab\r\n{\r\n " +
-                    "   using System;\r\n    using System.Collections.ObjectModel;\r\n    using System.Wi" +
-                    "ndows.Input;\r\n    using Honeywell.ACS.RTU.Studio.BuilderModel;\r\n    using Honeyw" +
-                    "ell.ACS.RTU.Studio.Enums;\r\n    using Honeywell.ACS.RTU.Studio.GUI.Resources;\r\n  " +
-                    "  using Honeywell.ACS.RTU.Studio.GUI.ViewModel.Tree;\r\n    using Honeywell.ACS.RT" +
-                    "U.Studio.Infrastructure.MVVM;\r\n\r\n    public sealed partial class COMViewModel\r\n " +
-                    "   {\r\n        /// <summary>\r\n        /// Field which backs the COMName property\r" +
-                    "\n        /// </summary>\r\n        private string _cOMName = \"\";\r\n\r\n        /// <s" +
-                    "ummary>\r\n        /// Gets / sets the COMName value\r\n        /// </summary>\r\n    " +
-                    "    public string COMName\r\n        {\r\n            get { return _cOMName; }\r\n    " +
-                    "        set\r\n            {\r\n                if (_cOMName == value) return;\r\n    " +
-                    "            _cOMName = value;\r\n\r\n                OnCOMNameChanged(value);\r\n     " +
-                    "           OnPropertyChanged(\"COMName\");\r\n            }\r\n        }\r\n\r\n        //" +
-                    "/ <summary>\r\n        /// Invoked when the value of COMName changes\r\n        /// " +
-                    "</summary>\r\n        partial void OnCOMNameChanged(string value);\r\n        /// <s" +
-                    "ummary>\r\n        /// Field which backs the FlowControlVisibility property\r\n     " +
-                    "   /// </summary>\r\n        private string _flowControlVisibility = \"Visible\";\r\n\r" +
-                    "\n        /// <summary>\r\n        /// Gets / sets the FlowControlVisibility value\r" +
-                    "\n        /// </summary>\r\n        public string FlowControlVisibility\r\n        {\r" +
-                    "\n            get { return _flowControlVisibility; }\r\n            set\r\n          " +
-                    "  {\r\n                if (_flowControlVisibility == value) return;\r\n             " +
-                    "   _flowControlVisibility = value;\r\n\r\n                OnFlowControlVisibilityCha" +
-                    "nged(value);\r\n                OnPropertyChanged(\"FlowControlVisibility\");\r\n     " +
-                    "       }\r\n        }\r\n\r\n        /// <summary>\r\n        /// Invoked when the value" +
-                    " of FlowControlVisibility changes\r\n        /// </summary>\r\n        partial void " +
-                    "OnFlowControlVisibilityChanged(string value);\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("autogen command")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: NoPartialClass.in.txt")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        public virtual void AutogenCommand()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "NoPartialClass.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "NoPartialClass.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "NoPartialClass.out.txt")]
+        public virtual void GenerateCode_NoPartialClass_In_Txt()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("autogen command", ((string[])(null)));
-#line 648
-this.ScenarioSetup(scenarioInfo);
+            this.GenerateCode("NoPartialClass.in.txt", "NoPartialClass.out.txt", ((string[])(null)));
 #line hidden
-#line 649
-    testRunner.Given("I have source code:", @"// -----------------------------------------------------------------------
-// <copyright file=""WireBaseViewModel.cs"" company=""Honeywell"">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Chart.VMWire.ViewModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows;
-
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    [AutoGenCommand(""NewProject"")]
-    [AutoGenCommand(""OpenProject"", ""this.NewProject"")]
-    [AutoGenCommand(""SaveProject"", ""this.SaveProject"", ""this.CanSaveProject"")]
-    public partial class WireBaseViewModel : ViewModelBase
-    {
-    }
-}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 676
-    testRunner.When("I ask to generate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: StandardAutogen.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "StandardAutogen.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "StandardAutogen.in.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "StandardAutogen.out.txt")]
+        public virtual void GenerateCode_StandardAutogen_In_Txt()
+        {
+            this.GenerateCode("StandardAutogen.in.txt", "StandardAutogen.out.txt", ((string[])(null)));
 #line hidden
-#line 677
-    testRunner.Then("the result should be:", "// -----------------------------------------------------------------------\r\n// Au" +
-                    "to generated by Hidden Code Auto Generator\r\n// Don\'t modify this file manually!\r" +
-                    "\n// <auto-generated />\r\n// -----------------------------------------------------" +
-                    "------------------\r\n\r\nnamespace Chart.VMWire.ViewModel\r\n{\r\n    using System;\r\n  " +
-                    "  using System.Collections.Generic;\r\n    using System.Linq;\r\n    using System.Te" +
-                    "xt;\r\n    using System.Windows;\r\n\r\n    public partial class WireBaseViewModel\r\n  " +
-                    "  {\r\n        /// <summary>\r\n        /// The NewProject command\r\n        /// </su" +
-                    "mmary>\r\n        private RelayCommand _newProjectCommand;\r\n\r\n        /// <summary" +
-                    ">\r\n        /// Gets the NewProject command.\r\n        /// </summary>\r\n        ///" +
-                    " <value>The NewProject command.</value>\r\n        public ICommand NewProjectComma" +
-                    "nd\r\n        {\r\n            get { return this._newProjectCommand ?? (this._newPro" +
-                    "jectCommand = new RelayCommand(this.ExecuteNewProjectWrap)); }\r\n        }\r\n\r\n   " +
-                    "     /// <summary>\r\n        /// delegate for invoking NewProjectCommand\r\n       " +
-                    " /// </summary>\r\n        private void ExecuteNewProjectWrap(object obj)\r\n       " +
-                    " {\r\n            ExecuteNewProject(obj);\r\n        }\r\n\r\n        /// <summary>\r\n   " +
-                    "     /// Invoked when NewProjectCommand invokes\r\n        /// </summary>\r\n       " +
-                    " partial void ExecuteNewProject(object obj);\r\n\r\n        /// <summary>\r\n        /" +
-                    "// The OpenProject command\r\n        /// </summary>\r\n        private RelayCommand" +
-                    " _openProjectCommand;\r\n\r\n        /// <summary>\r\n        /// Gets the OpenProject" +
-                    " command.\r\n        /// </summary>\r\n        /// <value>The OpenProject command.</" +
-                    "value>\r\n        public ICommand OpenProjectCommand\r\n        {\r\n            get {" +
-                    " return this._openProjectCommand ?? (this._openProjectCommand = new RelayCommand" +
-                    "(this.NewProject)); }\r\n        }\r\n\r\n        /// <summary>\r\n        /// The SaveP" +
-                    "roject command\r\n        /// </summary>\r\n        private RelayCommand _saveProjec" +
-                    "tCommand;\r\n\r\n        /// <summary>\r\n        /// Gets the SaveProject command.\r\n " +
-                    "       /// </summary>\r\n        /// <value>The SaveProject command.</value>\r\n    " +
-                    "    public ICommand SaveProjectCommand\r\n        {\r\n            get { return this" +
-                    "._saveProjectCommand ?? (this._saveProjectCommand = new RelayCommand(this.SavePr" +
-                    "oject, this.CanSaveProject)); }\r\n        }\r\n\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
         }
     }
 }

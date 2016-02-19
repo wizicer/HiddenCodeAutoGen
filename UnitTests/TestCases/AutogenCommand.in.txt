@@ -1,0 +1,24 @@
+// -----------------------------------------------------------------------
+// <copyright file="WireBaseViewModel.cs" company="Yours">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Chart.VMWire.ViewModel
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    [AutoGenCommand("NewProject")]
+    [AutoGenCommand("OpenProject", "this.NewProject")]
+    [AutoGenCommand("SaveProject", "this.SaveProject", "this.CanSaveProject")]
+    public partial class WireBaseViewModel : ViewModelBase
+    {
+    }
+}

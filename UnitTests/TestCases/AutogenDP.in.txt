@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------
+// <copyright file="WireBaseViewModel.cs" company="Yours">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Chart.VMWire.ViewModel
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    [AutoGenDP("WireInfo", typeof(string), "null")]
+    [AutoGenDP("WireInfo2", typeof(Wire), "new Wire()")]
+    public partial class WireBaseViewModel : ViewModelBase
+    {
+    }
+}
