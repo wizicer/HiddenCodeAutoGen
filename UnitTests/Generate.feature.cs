@@ -73,6 +73,7 @@ namespace UnitTests
         [NUnit.Framework.TestCaseAttribute("MultipleClass.in.txt", "MultipleClass.out.txt", new string[0])]
         [NUnit.Framework.TestCaseAttribute("NoPartialClass.in.txt", "NoPartialClass.out.txt", new string[0])]
         [NUnit.Framework.TestCaseAttribute("StandardAutogen.in.txt", "StandardAutogen.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("GenericWithCommaAutogen.in.txt", "GenericWithCommaAutogen.out.txt", new string[0])]
         public virtual void GenerateCode(string input, string output, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("generate code", exampleTags);

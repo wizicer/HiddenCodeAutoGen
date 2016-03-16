@@ -98,6 +98,7 @@
             Regex atRx = new Regex(@"^\s*\[AutoGen(?<name>[\w\d]*)\((?<data>.*)\)\]", RegexOptions.Multiline);
             Regex clRx = new Regex(@"( *\[[\w\d]*\(.*\)\]\s*){1,}
 (?<class>.*partial class \w*)");
+            var dataRx = new Regex(@"(?:^|, ?)(?<par>\""(?:[^\""]+|\""\"")*\""|[^,]*)");
 
             var clswithatt = clRx.Match(bstrInputFileContents).Value;
             return atRx.Matches(clswithatt)
@@ -105,7 +106,8 @@
                 .Select(m => new AutoGenInfo()
                 {
                     Name = m.Groups["name"].Value,
-                    Parameters = m.Groups["data"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries),
+                    //Parameters = m.Groups["data"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries),
+                    Parameters = dataRx.Matches(m.Groups["data"].Value).OfType<Match>().Select(_ => _.Groups["par"].Value).ToList(),
                 })
                 .ToList();
         }
@@ -115,9 +117,10 @@
             Regex nsRx = new Regex("namespace (.*)\r\n\\{");
             Regex usRx = new Regex("using .*;");
             //Regex clRx = new Regex(@"(?<class>.*class \w*)");
-            Regex pclRx = new Regex(@"(?<class>.*partial class \w*)");
-            Regex pclnmRx = new Regex(@".*partial class (?<class>\w*)");
-            Regex atRx = new Regex(@"^ *\[AutoGen(?<name>[\w\d]*)\((?<data>.*)\)\]", RegexOptions.Multiline);
+            Regex pclRx = new Regex(@"(?<class>.*partial class [\w<>, ]*)");
+            //Regex pclRx = new Regex(@"(?<class>.*partial class \w*)");
+            Regex pclnmRx = new Regex(@".*partial class (?<class>[\w<>, ]*)");
+            //Regex atRx = new Regex(@"^ *\[AutoGen(?<name>[\w\d]*)\((?<data>.*)\)\]", RegexOptions.Multiline);
 
             className = null;
 

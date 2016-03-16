@@ -49,7 +49,7 @@ public class WpfInpcGenerator : IGenerator
 
         var pr = ps[0].Replace("\"", "").Trim();
         var dv = ps[2].Trim();
-        var tp = ps[1].Replace("typeof(", "").Replace(")", "").Trim();
+        var tp = ps[1].Replace("\"", "").Replace("typeof(", "").Replace(")", "").Trim();
         if (tp.ToLower() != "string") dv = dv.Replace("\"", "");
         return string.Format(snippet,
             pr,
@@ -69,6 +69,17 @@ public class WpfInpcGenerator : IGenerator
         /// <param name="fieldType">Type of the field. only support typeof() method here</param>
         /// <param name="defaultValue">The default value.</param>
         public AutoGenAttribute(string fieldName, Type fieldType, object defaultValue)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoGenAttribute"/> class.
+        /// if the type is not string, the default value will remove the " on the begin and end
+        /// </summary>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="fieldType">Type of the field. only support typeof() method here. Wrap in string when type is generic type.</param>
+        /// <param name="defaultValue">The default value.</param>
+        public AutoGenAttribute(string fieldName, string fieldType, object defaultValue)
         {
         }
     }

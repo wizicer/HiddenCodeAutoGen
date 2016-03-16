@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------
+// <copyright file="WireBaseViewModel.cs" company="Yours">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Chart.VMWire.ViewModel
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    [AutoGen("WireData", typeof(string), "null")]
+    [AutoGen("Visibility", "typeof(Visibility<T1, T2>)", "Visibility.Hidden")]
+    public partial class WireBaseViewModel<T1, T2> : ViewModelBase
+    {
+    }
+}
