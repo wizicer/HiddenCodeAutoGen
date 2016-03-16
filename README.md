@@ -8,7 +8,10 @@ Created by [Icer](http://icerdesign.com)
 
 # TODO
 
+- [x] Support generic class
+- [x] Support comma in parameter
 - [ ] Support reference custom generator in code
+- [ ] Support multiple classes in one file
 - [ ] Publish vsix on Visual Studio Gallery
 
 # Installation
