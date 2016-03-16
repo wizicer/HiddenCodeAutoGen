@@ -1,7 +1,7 @@
 ﻿namespace UnitTests
 {
     using Generator;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
     using System.IO;
     using TechTalk.SpecFlow;
@@ -12,7 +12,7 @@
         private string _sourceCode = null;
         private string _generatedCode = null;
         private string _generatedCodeInternal = null;
-        private string _basePath = @"testcases\";
+        private string _basePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"testcases\");
 
         [When(@"I ask to generate")]
         public void WhenIAskToGenerate()

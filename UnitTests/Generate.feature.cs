@@ -17,42 +17,38 @@ namespace UnitTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Generate")]
     public partial class GenerateFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
 #line 1 "Generate.feature"
 #line hidden
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        [NUnit.Framework.TestFixtureSetUpAttribute()]
+        public virtual void FeatureSetup()
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Generate", "    As Generator user\r\n    I want to get generated content\r\n    So that I can imp" +
                     "rove my development speed", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-        public static void FeatureTearDown()
+        [NUnit.Framework.TestFixtureTearDownAttribute()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
-            if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Generate")))
-            {
-                UnitTests.GenerateFeature.FeatureSetup(null);
-            }
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -68,6 +64,15 @@ namespace UnitTests
             testRunner.CollectScenarioErrors();
         }
         
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("generate code")]
+        [NUnit.Framework.TestCaseAttribute("AutogenCommand.in.txt", "AutogenCommand.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("AutogenDP.in.txt", "AutogenDP.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("MisleadInComments.in.txt", "MisleadInComments.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("MixedTypeAutogen.in.txt", "MixedTypeAutogen.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("MultipleClass.in.txt", "MultipleClass.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("NoPartialClass.in.txt", "NoPartialClass.out.txt", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("StandardAutogen.in.txt", "StandardAutogen.out.txt", new string[0])]
         public virtual void GenerateCode(string input, string output, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("generate code", exampleTags);
@@ -81,90 +86,6 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Then(string.Format("the result should be like in file {0}", output), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: AutogenCommand.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "AutogenCommand.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "AutogenCommand.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "AutogenCommand.out.txt")]
-        public virtual void GenerateCode_AutogenCommand_In_Txt()
-        {
-            this.GenerateCode("AutogenCommand.in.txt", "AutogenCommand.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: AutogenDP.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "AutogenDP.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "AutogenDP.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "AutogenDP.out.txt")]
-        public virtual void GenerateCode_AutogenDP_In_Txt()
-        {
-            this.GenerateCode("AutogenDP.in.txt", "AutogenDP.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MisleadInComments.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MisleadInComments.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MisleadInComments.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MisleadInComments.out.txt")]
-        public virtual void GenerateCode_MisleadInComments_In_Txt()
-        {
-            this.GenerateCode("MisleadInComments.in.txt", "MisleadInComments.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MixedTypeAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MixedTypeAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MixedTypeAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MixedTypeAutogen.out.txt")]
-        public virtual void GenerateCode_MixedTypeAutogen_In_Txt()
-        {
-            this.GenerateCode("MixedTypeAutogen.in.txt", "MixedTypeAutogen.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: MultipleClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "MultipleClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "MultipleClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "MultipleClass.out.txt")]
-        public virtual void GenerateCode_MultipleClass_In_Txt()
-        {
-            this.GenerateCode("MultipleClass.in.txt", "MultipleClass.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: NoPartialClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "NoPartialClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "NoPartialClass.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "NoPartialClass.out.txt")]
-        public virtual void GenerateCode_NoPartialClass_In_Txt()
-        {
-            this.GenerateCode("NoPartialClass.in.txt", "NoPartialClass.out.txt", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("generate code: StandardAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Generate")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "StandardAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "StandardAutogen.in.txt")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "StandardAutogen.out.txt")]
-        public virtual void GenerateCode_StandardAutogen_In_Txt()
-        {
-            this.GenerateCode("StandardAutogen.in.txt", "StandardAutogen.out.txt", ((string[])(null)));
-#line hidden
         }
     }
 }
