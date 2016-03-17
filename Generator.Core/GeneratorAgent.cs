@@ -106,7 +106,6 @@
                 .Select(m => new AutoGenInfo()
                 {
                     Name = m.Groups["name"].Value,
-                    //Parameters = m.Groups["data"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries),
                     Parameters = dataRx.Matches(m.Groups["data"].Value).OfType<Match>().Select(_ => _.Groups["par"].Value).ToList(),
                 })
                 .ToList();
