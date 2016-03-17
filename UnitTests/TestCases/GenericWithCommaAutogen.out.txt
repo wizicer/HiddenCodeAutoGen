@@ -64,5 +64,31 @@ namespace Chart.VMWire.ViewModel
         /// Invoked when the value of Visibility changes
         /// </summary>
         partial void OnVisibilityChanged(Visibility<T1, T2> value);
+        /// <summary>
+        /// Gets / sets the WireInfo property value, This is a dependency property
+        /// </summary>
+        public Dictionary<int, int[]> WireInfo
+        {
+            get { return (Dictionary<int, int[]>)GetValue(WireInfoProperty); }
+            set { SetValue(WireInfoProperty, value); }
+        }
+
+        /// <summary>
+        /// Defines the WireInfo dependnecy property.
+        /// </summary>
+        public static readonly System.Windows.DependencyProperty WireInfoProperty =
+            System.Windows.DependencyProperty.Register("WireInfo", typeof(Dictionary<int, int[]>), typeof(WireBaseViewModel<T1, T2>),
+                new System.Windows.PropertyMetadata(null, new System.Windows.PropertyChangedCallback(OnWireInfoPropertyChanged)));
+
+        /// <summary>
+        /// Invoked when the WireInfo property changes
+        /// </summary>
+        partial void OnWireInfoPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs e);
+
+        private static void OnWireInfoPropertyChanged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            WireBaseViewModel<T1, T2> control = d as WireBaseViewModel<T1, T2>;
+            control.OnWireInfoPropertyChanged(e);
+        }
     }
 }

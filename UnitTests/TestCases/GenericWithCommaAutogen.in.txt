@@ -17,6 +17,7 @@ namespace Chart.VMWire.ViewModel
     /// </summary>
     [AutoGen("WireData", typeof(string), "null")]
     [AutoGen("Visibility", "typeof(Visibility<T1, T2>)", "Visibility.Hidden")]
+    [AutoGenDP("WireInfo", "typeof(Dictionary<int, int[]>)", null)]
     public partial class WireBaseViewModel<T1, T2> : ViewModelBase
     {
     }

@@ -50,7 +50,7 @@ public class DPGenerator : IGenerator
 
         var prop = ps[0].Replace("\"", "").Trim();
         var defaultValue = ps[2].Trim();
-        var type = ps[1].Replace("typeof(", "").Replace(")", "").Trim();
+        var type = ps[1].Replace("\"", "").Replace("typeof(", "").Replace(")", "").Trim();
         if (type.ToLower() != "string") defaultValue = defaultValue.Replace("\"", "");
         return string.Format(snippet,
             prop,
@@ -70,6 +70,17 @@ public class DPGenerator : IGenerator
         /// <param name="fieldType">Type of the field. only support typeof() method here</param>
         /// <param name="defaultValue">The default value.</param>
         public AutoGenDPAttribute(string fieldName, Type fieldType, object defaultValue = null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoGenEntityAttribute"/> class.
+        /// if the type is not string, the default value will remove the " on the begin and end
+        /// </summary>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="fieldType">Type of the field. only support typeof() method here. Wrap in string when type is generic type.</param>
+        /// <param name="defaultValue">The default value.</param>
+        public AutoGenDPAttribute(string fieldName, string fieldType, object defaultValue = null)
         {
         }
     }
