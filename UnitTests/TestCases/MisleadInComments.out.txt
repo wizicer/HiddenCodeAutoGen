@@ -26,9 +26,10 @@ namespace Yours.ACS.RTU.Studio.GUI.ViewModel.Tab
             set
             {
                 if (_cOMName == value) return;
+                var old = _cOMName;
                 _cOMName = value;
 
-                OnCOMNameChanged(value);
+                OnCOMNameChanged(old, value);
                 OnPropertyChanged("COMName");
             }
         }
@@ -36,7 +37,7 @@ namespace Yours.ACS.RTU.Studio.GUI.ViewModel.Tab
         /// <summary>
         /// Invoked when the value of COMName changes
         /// </summary>
-        partial void OnCOMNameChanged(string value);
+        partial void OnCOMNameChanged(string oldValue, string newValue);
         /// <summary>
         /// Field which backs the FlowControlVisibility property
         /// </summary>
@@ -51,9 +52,10 @@ namespace Yours.ACS.RTU.Studio.GUI.ViewModel.Tab
             set
             {
                 if (_flowControlVisibility == value) return;
+                var old = _flowControlVisibility;
                 _flowControlVisibility = value;
 
-                OnFlowControlVisibilityChanged(value);
+                OnFlowControlVisibilityChanged(old, value);
                 OnPropertyChanged("FlowControlVisibility");
             }
         }
@@ -61,6 +63,6 @@ namespace Yours.ACS.RTU.Studio.GUI.ViewModel.Tab
         /// <summary>
         /// Invoked when the value of FlowControlVisibility changes
         /// </summary>
-        partial void OnFlowControlVisibilityChanged(string value);
+        partial void OnFlowControlVisibilityChanged(string oldValue, string newValue);
     }
 }

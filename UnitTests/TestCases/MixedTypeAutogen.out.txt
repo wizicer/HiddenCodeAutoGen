@@ -36,9 +36,10 @@ namespace Chart.VMWire.ViewModel
             set
             {
                 if (_wireInfo == value) return;
+                var old = _wireInfo;
                 _wireInfo = value;
 
-                OnWireInfoChanged(value);
+                OnWireInfoChanged(old, value);
                 OnPropertyChanged("WireInfo");
             }
         }
@@ -46,6 +47,6 @@ namespace Chart.VMWire.ViewModel
         /// <summary>
         /// Invoked when the value of WireInfo changes
         /// </summary>
-        partial void OnWireInfoChanged(string value);
+        partial void OnWireInfoChanged(string oldValue, string newValue);
     }
 }

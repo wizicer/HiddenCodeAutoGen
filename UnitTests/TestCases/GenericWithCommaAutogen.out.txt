@@ -28,9 +28,10 @@ namespace Chart.VMWire.ViewModel
             set
             {
                 if (_wireData == value) return;
+                var old = _wireData;
                 _wireData = value;
 
-                OnWireDataChanged(value);
+                OnWireDataChanged(old, value);
                 OnPropertyChanged("WireData");
             }
         }
@@ -38,7 +39,7 @@ namespace Chart.VMWire.ViewModel
         /// <summary>
         /// Invoked when the value of WireData changes
         /// </summary>
-        partial void OnWireDataChanged(string value);
+        partial void OnWireDataChanged(string oldValue, string newValue);
         /// <summary>
         /// Field which backs the Visibility property
         /// </summary>
@@ -53,9 +54,10 @@ namespace Chart.VMWire.ViewModel
             set
             {
                 if (_visibility == value) return;
+                var old = _visibility;
                 _visibility = value;
 
-                OnVisibilityChanged(value);
+                OnVisibilityChanged(old, value);
                 OnPropertyChanged("Visibility");
             }
         }
@@ -63,7 +65,7 @@ namespace Chart.VMWire.ViewModel
         /// <summary>
         /// Invoked when the value of Visibility changes
         /// </summary>
-        partial void OnVisibilityChanged(Visibility<T1, T2> value);
+        partial void OnVisibilityChanged(Visibility<T1, T2> oldValue, Visibility<T1, T2> newValue);
         /// <summary>
         /// Gets / sets the WireInfo property value, This is a dependency property
         /// </summary>

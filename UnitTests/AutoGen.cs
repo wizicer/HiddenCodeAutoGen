@@ -26,9 +26,10 @@ public class WpfInpcGenerator : IGenerator
             set
             {
                 if ($field$ == value) return;
+                var old = $field$;
                 $field$ = value;
 
-                On$property$Changed(value);
+                On$property$Changed(old, value);
                 OnPropertyChanged(""$property$"");
             }
         }
@@ -36,7 +37,7 @@ public class WpfInpcGenerator : IGenerator
         /// <summary>
         /// Invoked when the value of $property$ changes
         /// </summary>
-        partial void On$property$Changed($type$ value);
+        partial void On$property$Changed($type$ oldValue, $type$ newValue);
 "
             .Replace("\r", "")
             .Replace("\n", "\r\n")
