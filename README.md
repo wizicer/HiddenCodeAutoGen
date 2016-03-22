@@ -6,6 +6,8 @@ Created by [Icer](http://icerdesign.com)
 
     Helper Generator to generate varies of hidden code which we shouldn't care about.
 
+UNDER HAVY DEVELOPMENT. API MAY AND WILL CHANGE.
+
 # TODO
 
 - [x] Support generic class
