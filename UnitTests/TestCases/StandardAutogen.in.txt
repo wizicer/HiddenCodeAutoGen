@@ -17,6 +17,8 @@ namespace Chart.VMWire.ViewModel
     /// TODO: Update summary.
     /// </summary>
     [AutoGen("WireData", typeof(string), "null")]
+
+    // comment
     [AutoGen("Visibility", typeof(Visibility), "Visibility.Hidden")]
     public partial class WireBaseViewModel : ViewModelBase
     {

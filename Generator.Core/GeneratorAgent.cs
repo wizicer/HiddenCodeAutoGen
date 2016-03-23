@@ -33,9 +33,9 @@
                 Func<string, IGenerator> getGenerator = (s) => dictGen.ContainsKey(s) ? dictGen[s] : null;
 
                 string className;
-                var head = GetHead(inputFileContents, out className);
+                var head = GetHead(source, out className);
                 if (head == null) return null;
-                var par = GetList(inputFileContents);
+                var par = GetList(source);
 
                 var str = string.Empty;
 
