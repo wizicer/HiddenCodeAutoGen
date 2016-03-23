@@ -71,7 +71,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenerateSteps.cs" />
-    <Compile Include="UnitTest.cs" />
     <Compile Include="AutoGen.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
