@@ -5,6 +5,8 @@ using System.Linq;
 
 public class WpfInpcGenerator : IGenerator
 {
+    public string AttributeName { get { return ""; } }
+
     public string Generate(string className, IList<IList<string>> ps)
     {
         return ps.Aggregate("", (str, m) => str + GenAutoINPC(m));

@@ -11,70 +11,79 @@
     using Contracts;
     public class GeneratorAgent
     {
-        private class ErrorGenerator : IGenerator
+        [Serializable]
+        public class GenerationException : Exception
         {
-            private string errorMessage;
-            public ErrorGenerator(string msg)
-            {
-                this.errorMessage = msg;
-            }
-            public string Generate(string className, IList<IList<string>> parameters)
-            {
-                return this.errorMessage;
-            }
+            public GenerationException() { }
+            public GenerationException(string message) : base(message) { }
+            public GenerationException(string message, Exception inner) : base(message, inner) { }
+            protected GenerationException(
+              System.Runtime.Serialization.SerializationInfo info,
+              System.Runtime.Serialization.StreamingContext context) : base(info, context)
+            { }
         }
 
-        public static string Gen(string inputFileContents)
+        public static string Gen(string inputFilePath, string inputFileContents, string defaultNamespace)
         {
             try
             {
                 var source = RemoveComments(inputFileContents);
-                return Gen(source, genName =>
+
+                Dictionary<string, IGenerator> dictGen = GetGenerators(inputFilePath, inputFileContents);
+                Func<string, IGenerator> getGenerator = (s) => dictGen.ContainsKey(s) ? dictGen[s] : null;
+
+                string className;
+                var head = GetHead(inputFileContents, out className);
+                if (head == null) return null;
+                var par = GetList(inputFileContents);
+
+                var str = string.Empty;
+
+                foreach (var genName in par.Select(agi => agi.Name).Distinct())
+                {
+                    var ps = par.Where(agi => agi.Name == genName).Select(agi => agi.Parameters).ToList();
+                    var generator = getGenerator(genName);
+                    if (generator != null)
+                    {
+                        str += generator.Generate(className, ps);
+                    }
+                }
+
+                return head + str + GetFoot();
+            }
+            catch (GenerationException ex)
+            {
+                return string.Format("{0}/* {1}{0}*/{0}", Environment.NewLine, ex.Message);
+            }
+        }
+
+        private static Dictionary<string, IGenerator> GetGenerators(string inputFilePath, string inputFileContents)
+        {
+            var agRx = new Regex("// <AutoGen src=\"(?<path>.*)\" />");
+
+            return agRx.Matches(inputFileContents)
+                .OfType<Match>()
+                .Select(m =>
                 {
                     try
                     {
-                        var file = Path.Combine(
-                            (new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location)).Directory.FullName,
-                            string.Format("AutoGen{0}.cs", genName));
+                        var fi = new FileInfo(inputFilePath);
+                        var file = Path.Combine(fi.DirectoryName, m.Groups["path"].Value);
                         if (File.Exists(file))
                         {
                             var script = CSScript.Evaluator.LoadFile<IGenerator>(file);
                             return script;
                         }
-                        return null;
+
+                        throw new GenerationException(string.Format("Error as file [{0}] not exist", file));
                     }
                     catch (Exception inex)
                     {
-                        return new ErrorGenerator(string.Format("{0}/* Error when using [AutoGen{1}.cs]:{0}{2}{0}*/{0}", Environment.NewLine, genName, inex.Message));
+                        throw new GenerationException(string.Format("Error when parsing [{1}]:{0}{2}",
+                            Environment.NewLine, inputFilePath, inex.Message), inex);
                     }
-                });
-            }
-            catch (Exception ex)
-            {
-                return string.Format("/*\r\n{0}\r\n*/", ex.Message);
-            }
-        }
-
-        public static string Gen(string inputFileContents, Func<string, IGenerator> getGenerator)
-        {
-            string className;
-            var head = GetHead(inputFileContents, out className);
-            if (head == null) return null;
-            var par = GetList(inputFileContents);
-
-            var str = string.Empty;
-
-            foreach (var genName in par.Select(agi => agi.Name).Distinct())
-            {
-                var ps = par.Where(agi => agi.Name == genName).Select(agi => agi.Parameters).ToList();
-                var generator = getGenerator(genName);
-                if (generator != null)
-                {
-                    str += generator.Generate(className, ps);
-                }
-            }
-
-            return head + str + GetFoot();
+                })
+                .ToDictionary(g => g.AttributeName);
         }
 
         public static string RemoveComments(string content)

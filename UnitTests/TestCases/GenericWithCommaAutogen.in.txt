@@ -1,3 +1,5 @@
+// <AutoGen src="..\..\..\AutoGen.cs" />
+// <AutoGen src="..\..\..\AutoGenDP.cs" />
 // -----------------------------------------------------------------------
 // <copyright file="WireBaseViewModel.cs" company="Yours">
 // TODO: Update copyright text.

@@ -27,7 +27,7 @@ namespace Generator
                 throw new ArgumentNullException(nameof(inputFileContents));
             }
 
-            var gen = GeneratorAgent.Gen(inputFileContents);
+            var gen = GeneratorAgent.Gen(inputFilePath, inputFileContents, defaultNamespace);
             return gen == null ? new byte[] { } : Encoding.UTF8.GetBytes(gen);
         }
 

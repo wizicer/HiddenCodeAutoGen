@@ -5,6 +5,7 @@ using System.Linq;
 
 public class CommandAutoGen : IGenerator
 {
+    public string AttributeName { get { return "Command"; } }
     public string Generate(string className, IList<IList<string>> ps)
     {
         return ps.Aggregate("", (str, m) => str + GenAutoCommand(m));

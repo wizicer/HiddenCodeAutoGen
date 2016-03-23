@@ -5,6 +5,7 @@ using System.Linq;
 
 public class AutoGenEntity : IGenerator
 {
+    public string AttributeName { get { return "Entity"; } }
     public string Generate(string className, IList<IList<string>> ps)
     {
         var snippetProp = @"        public $type$ $property$ { get;$private$ set; }";

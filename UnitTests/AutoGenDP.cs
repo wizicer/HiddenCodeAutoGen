@@ -5,6 +5,7 @@ using System.Linq;
 
 public class DPGenerator : IGenerator
 {
+    public string AttributeName { get { return "DP"; } }
     public string Generate(string className, IList<IList<string>> ps)
     {
         return ps.Aggregate("", (str, m) => str + GenAutoDP(className, m));

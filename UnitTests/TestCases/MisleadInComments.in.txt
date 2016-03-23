@@ -1,3 +1,4 @@
+// <AutoGen src="..\..\..\AutoGen.cs" />
 // -----------------------------------------------------------------------
 // <copyright Yours INC. file="COMViewModel.cs" company="Yours">
 //     Copyright 2013 Yours INC.
