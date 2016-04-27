@@ -54,26 +54,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="..\UnitTests\AutoGen.cs">
-      <Link>AutoGen.cs</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="..\UnitTests\AutoGenCommand.cs">
-      <Link>AutoGenCommand.cs</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="..\UnitTests\AutoGenDP.cs">
-      <Link>AutoGenDP.cs</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="..\UnitTests\AutoGenEntity.cs">
-      <Link>AutoGenEntity.cs</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Compile Include="CustomToolBase.cs" />
     <Compile Include="CustomToolPackage.cs" />
     <Compile Include="HiddenCodeAutoGenerator.cs" />

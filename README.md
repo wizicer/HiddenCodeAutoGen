@@ -12,7 +12,7 @@ UNDER HAVY DEVELOPMENT. API MAY AND WILL CHANGE.
 
 - [x] Support generic class
 - [x] Support comma in parameter
-- [ ] Support reference custom generator in code
+- [x] Support reference custom generator in code
 - [ ] Support multiple classes in one file
 - [ ] Publish vsix on Visual Studio Gallery
 
@@ -37,6 +37,18 @@ Open it and install to your VS.
 ![Set Custom Tool Property](https://github.com/wizicer/HiddenCodeAutoGen/blob/master/doc/propertyset.png "Set Custom Tool Property")
 
 Set `Custom Tool` to `HiddenCodeAutoGenerator`.
+
+Put following code at top of your code:
+(of course, you should make sure the corresponding generator exists in the relative path)
+
+```
+// <AutoGen src="..\..\..\Commons\AutoGen\AutoGen.cs" />
+// <AutoGen src="..\..\..\Commons\AutoGen\AutoGenINPC.cs" />
+```
+
+Currently available generators:
+
+* [AutoGen]()
 
 # Usage
 
